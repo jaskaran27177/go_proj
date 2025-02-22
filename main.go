@@ -8,8 +8,7 @@ import (
 
 func main(){
 	
-	srvhttp.Mux.HandleFunc("/", response)
-	srvhttp.Mux.HandleFunc("/v1/sum", sum)
+	
 	port:=tcpPort()
 	log("Server is running on port: ", port)
 	err:=http.ListenAndServe(":"+port, srvhttp.Mux)
