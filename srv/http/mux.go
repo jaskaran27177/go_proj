@@ -1,4 +1,4 @@
-package srvhttp
+package httpsvr
 
 import "net/http"
 
