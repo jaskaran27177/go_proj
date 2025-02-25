@@ -2,13 +2,13 @@ package sum
 
 import (
 	"fmt"
-	httpsvr "myproject/srv/http"
+	httpsrv "myproject/srv/http"
 	"net/http"
 	"strconv"
 )
 func init(){
 	
-	httpsvr.Mux.HandleFunc("/v1/sum", sum)
+	httpsrv.Mux.HandleFunc("/v1/sum", sum)
 }
 
 
