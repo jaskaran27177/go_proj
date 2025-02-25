@@ -1,0 +1,30 @@
+package httpmux
+
+import (
+	"errors"
+	"net/http"
+)
+
+
+
+type HTTPMux struct {
+    pathHandlers map[string]http.Handler
+}
+
+func (receiver *HTTPMux) ServeHTTP(respwriter http.ResponseWriter, req *http.Request) {
+    // TODO
+	if handler, ok := receiver.pathHandlers[req.URL.Path]; ok {
+		handler.ServeHTTP(respwriter, req)
+		return
+	}
+	http.NotFound(respwriter, req)
+}
+
+func (receiver *HTTPMux) HandlePath(handler http.Handler, path string) error {
+    // TODO
+	if receiver.pathHandlers[path] != nil {
+		return errors.New("path already exists")
+	}
+	receiver.pathHandlers[path] = handler
+	return nil
+}
