@@ -13,6 +13,9 @@ type HTTPMux struct {
 
 func (receiver *HTTPMux) ServeHTTP(respwriter http.ResponseWriter, req *http.Request) {
     // TODO
+	if receiver.pathHandlers == nil {
+		receiver.pathHandlers = make(map[string]http.Handler)
+	}
 	if handler, ok := receiver.pathHandlers[req.URL.Path]; ok {
 		handler.ServeHTTP(respwriter, req)
 		return
@@ -22,6 +25,9 @@ func (receiver *HTTPMux) ServeHTTP(respwriter http.ResponseWriter, req *http.Req
 
 func (receiver *HTTPMux) HandlePath(handler http.Handler, path string) error {
     // TODO
+	if receiver.pathHandlers == nil {
+		receiver.pathHandlers = make(map[string]http.Handler)
+	}
 	if receiver.pathHandlers[path] != nil {
 		return errors.New("path already exists")
 	}
