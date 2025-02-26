@@ -1,5 +1,5 @@
 package httpsrv
 
-import "net/http"
+import httpmux "myproject/lib/httpmux"
 
-var Mux = http.NewServeMux()
+var Mux = httpmux.NewHTTPMux()

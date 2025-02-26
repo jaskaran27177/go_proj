@@ -8,7 +8,7 @@ import (
 )
 func init(){
 	
-	httpsrv.Mux.HandleFunc("/v1/sum", sum)
+	httpsrv.Mux.HandlePathFunc("/v1/sum", sum)
 }
 
 
