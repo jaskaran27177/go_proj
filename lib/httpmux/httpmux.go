@@ -9,7 +9,7 @@ import (
 
 
 type HTTPMux struct {
-    pathHandlers map[string]http.Handler
+    PathHandlers map[string]http.Handler
 	mu sync.Mutex
 }
 
@@ -17,10 +17,10 @@ func (receiver *HTTPMux) ServeHTTP(respwriter http.ResponseWriter, req *http.Req
     // TODO
 	receiver.mu.Lock()
     defer receiver.mu.Unlock()
-	// if receiver.pathHandlers == nil {
-	// 	receiver.pathHandlers = make(map[string]http.Handler)
-	// }
-	if handler, ok := receiver.pathHandlers[req.URL.Path]; ok {
+	if receiver.PathHandlers == nil {
+		receiver.PathHandlers = make(map[string]http.Handler)
+	}
+	if handler, ok := receiver.PathHandlers[req.URL.Path]; ok {
 		handler.ServeHTTP(respwriter, req)
 		return
 	}
@@ -31,21 +31,21 @@ func (receiver *HTTPMux) HandlePath(handler http.Handler, path string) error {
     // TODO
 	receiver.mu.Lock()
     defer receiver.mu.Unlock()
-	// if receiver.pathHandlers == nil {
-	// 	receiver.pathHandlers = make(map[string]http.Handler)
-	// }
-	if receiver.pathHandlers[path] != nil {
+	if receiver.PathHandlers == nil {
+		receiver.PathHandlers = make(map[string]http.Handler)
+	}
+	if receiver.PathHandlers[path] != nil {
 		return errors.New("path already exists")
 	}
-	receiver.pathHandlers[path] = handler
+	receiver.PathHandlers[path] = handler
 	return nil
 }
-func (receiver *HTTPMux) HandlePathFunc(path string,fn func(http.ResponseWriter, *http.Request)) {
+func (receiver *HTTPMux) HandlePathFunc(fn func(http.ResponseWriter, *http.Request),path string) {
     // TODO
 	receiver.HandlePath(http.HandlerFunc(fn), path)
 }
-func NewHTTPMux() *HTTPMux {
-    return &HTTPMux{
-        pathHandlers: make(map[string]http.Handler), //Properly initializes the map
-    }
-}
+// func NewHTTPMux() *HTTPMux {
+//     return &HTTPMux{
+//         pathHandlers: make(map[string]http.Handler), //Properly initializes the map
+//     }
+// }

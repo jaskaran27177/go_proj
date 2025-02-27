@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 func init(){
-	httpsrv.Mux.HandlePathFunc("/", servehttp)
+	httpsrv.Mux.HandlePathFunc(servehttp,"/")
 }
 
 func servehttp(w http.ResponseWriter, r *http.Request){
