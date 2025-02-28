@@ -9,7 +9,7 @@ import (
 
 
 type HTTPMux struct {
-    PathHandlers map[string]http.Handler
+    pathHandlers map[string]http.Handler
 	mu sync.Mutex
 }
 
@@ -17,10 +17,10 @@ func (receiver *HTTPMux) ServeHTTP(respwriter http.ResponseWriter, req *http.Req
     // TODO
 	receiver.mu.Lock()
     defer receiver.mu.Unlock()
-	if receiver.PathHandlers == nil {
-		receiver.PathHandlers = make(map[string]http.Handler)
+	if receiver.pathHandlers == nil {
+		receiver.pathHandlers = make(map[string]http.Handler)
 	}
-	if handler, ok := receiver.PathHandlers[req.URL.Path]; ok {
+	if handler, ok := receiver.pathHandlers[req.URL.Path]; ok {
 		handler.ServeHTTP(respwriter, req)
 		return
 	}
@@ -31,13 +31,13 @@ func (receiver *HTTPMux) HandlePath(handler http.Handler, path string) error {
     // TODO
 	receiver.mu.Lock()
     defer receiver.mu.Unlock()
-	if receiver.PathHandlers == nil {
-		receiver.PathHandlers = make(map[string]http.Handler)
+	if receiver.pathHandlers == nil {
+		receiver.pathHandlers = make(map[string]http.Handler)
 	}
-	if receiver.PathHandlers[path] != nil {
+	if receiver.pathHandlers[path] != nil {
 		return errors.New("path already exists")
 	}
-	receiver.PathHandlers[path] = handler
+	receiver.pathHandlers[path] = handler
 	return nil
 }
 func (receiver *HTTPMux) HandlePathFunc(fn func(http.ResponseWriter, *http.Request),path string) {
