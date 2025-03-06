@@ -4,3 +4,7 @@ github.com/jaskaran27177/go-log v0.0.0-20250304072626-594236d97f7d h1:LYwhYOK4Vu
 github.com/jaskaran27177/go-log v0.0.0-20250304072626-594236d97f7d/go.mod h1:kSuN/+733WKf1v2XW1QtHqbgfsc2wY39NutYRSIwQz4=
 github.com/jaskaran27177/go-log v0.1.0 h1:c76LG81jOUksQeFF9Eak4lwj8gJVcJ9Q/lZJjbRVR3o=
 github.com/jaskaran27177/go-log v0.1.0/go.mod h1:kSuN/+733WKf1v2XW1QtHqbgfsc2wY39NutYRSIwQz4=
+github.com/jaskaran27177/go-log v0.2.0 h1:W49uHJF84fW5RkMmDdXR2PlpPwluT+/CAoKntBJTsfM=
+github.com/jaskaran27177/go-log v0.2.0/go.mod h1:kSuN/+733WKf1v2XW1QtHqbgfsc2wY39NutYRSIwQz4=
+github.com/jaskaran27177/go-log v0.4.0 h1:7fXJpQU0YYW921H1a2qTkcbnOg/UlrMa0i9ax3vyexo=
+github.com/jaskaran27177/go-log v0.4.0/go.mod h1:kSuN/+733WKf1v2XW1QtHqbgfsc2wY39NutYRSIwQz4=
